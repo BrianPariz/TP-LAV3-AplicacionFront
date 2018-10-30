@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>BoostGame</title>
+	<link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/supermario/PNG/retro-mushroom-super-2.png">
+    <link rel="stylesheet" href="ext/css/bootstrap.min.css">
+    <script src="ext/js/jquery-3.3.1.min.js"></script>
+    <script src="ext/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/navbarStyle.css">
+	<link rel="stylesheet" href="css/styleIndex.css">
+	<script src="js/Genericos.js"></script>
+	<script src="js/Articulo.js"></script>
+	<script src="js/Videojuego.js"></script>
+	<script src="js/Funciones.js"></script>
+</head>
+<body id="bdy" style="background-color:darkslategray;" onload="Final.Genericos.Time(Final.Funciones.Onload);">
+	<div data-backdrop="static" class="modal" id="spin">
+		<div class="modal-dialog modal-dialog-centered">
+			<img class="loading" src="./img/pacman.gif">
+		</div>
+	</div>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand text-white">Bienvenido a BoostGame!</a>
+			<ul class="navbar-nav ml-auto">
+				<button id="btnCompras" type="reset" class="btn btn-success" data-backdrop="static"  data-toggle="modal" data-target="#modalCompra" style="display: none;">
+					<i class="fa fa-shopping-cart"></i>
+					 <strong id="strCant"> 0</strong>
+				</button>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<img src="./img/mushroomN.png" alt="" width="25" height="25">
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" style="position: absolute !important;">
+						<a class="dropdown-item" href="#" onclick="Final.Funciones.Info();">Acerca</a>
+						<a class="dropdown-item" href="#" onclick="Final.Genericos.Salir();">Cerrar Sesión</a>
+					</div>
+				</li>
+			</ul>
+		</nav>
+	</header>
+    <div class="container-fluid">
+        <div class="row">
+            <aside id="aside" class="mb-3">
+				<nav id="sidebar" style="display: none;">
+					<button type="button" id="sidebarCollapse" onclick="Final.Funciones.AjustarCol()" class="float-right btn-responsive btnCollapse btn btn-secondary dropdown-toggle-split">
+						<i id="icoTggl" class="fa fa-toggle-right" style="color:black;border-right-width: 380px;"></i>
+					</button>
+					<div class="card">
+						<article class="card-body">
+							<h4 class="card-title mb-3 lblIng">Ingreso de videojuego</h4>
+							<h4 class="card-title mb-3 lblMod" style="display: none;"><font size="4.5">Modificación de videojuego</font></h4>
+						<form>
+							<div class="form-group">
+								<label>Juego</label>
+								<input id="juego" class="form-control" placeholder="Ingrese un nombre..">
+								<label id="lblJuego" class="form-text text-danger" style="display: none;">Falta nombre</label>
+							</div>
+							<div class="form-group">
+									<label>Consola</label>
+									<select class="form-control" id="consola">
+										<option value="null">Seleccione una consola..</option>
+										<option value="Xbox">Xbox One</option>
+										<option value="PS4">Play Station 4</option>
+										<option value="Switch">Nintendo Switch</option>
+									</select>
+								<label id="lblConsola" class="form-text text-danger" style="display: none;">Falta seleccionar consola</label>
+							</div>
+							<div class="form-group">
+								<label>Compañía</label>
+								<input id="compania" class="form-control" placeholder="Ingrese una compañía..">
+								<label id="lblCompania" class="form-text text-danger" style="display: none;">Falta ingresar compañía</label>
+							</div>
+							<div class="form-group">
+								<label>Precio</label>
+								<input id="precio" class="form-control" type="number" placeholder="Ingrese un precio.." maxlength="2">
+								<label id="lblPrecio" class="form-text text-danger" style="display: none;">Falta ingresar precio</label>
+							</div>
+							<div class="form-group">
+								<label>Stock</label>
+								<select class="form-control" id="disponible">
+									<option value="true">Disponible</option>
+									<option value="false">No disponible</option>
+								</select>
+							</div>
+							<button id="btnCancelar" type="reset" class="btn btn-danger" onclick="Final.Funciones.ReestablecerTodo();" style="display: none;"> Cancelar <i class="fa fa-close" style="color:black;"></i></button>
+							<button id="btnModificar" type="button" class="btn btn-success pull-right" onclick="Final.Genericos.Time(Final.Funciones.Modificar);" style="display: none;"> Modificar <i class="fa fa-pencil" style="color:black;"></i></button>
+							<button id="btnAgregar" type="button" class="btn btn-success pull-right" onclick="Final.Genericos.Time(Final.Funciones.Agregar);"> Agregar <i class="fa fa-plus" style="color:black;"></i></button>
+							<button id="btnLimpiar" type="reset" class="btn btn-info" onclick="Final.Funciones.ReestablecerTodo();"> Limpiar <img src="./img/clean.png" alt="" width="16" height="16"></button>
+							</form>
+						</article>
+					</div>
+				</nav>	
+			</aside>
+			<div class="col-xm col-sm col-md col-lg col-xl">
+					<form class="form-inline mb-3">
+						<div id = "divIzq" class="form-group col-md-8" style="padding-left: 0px;">
+							<input id="busJuego" type="text" class="form-control mr-sm-3" placeholder="Búsqueda por juego.." onkeyup="Final.Funciones.FiltrarJuegos(event)">
+							<label class="text-white mr-sm-2">Consola:</label>
+							<select class="flt form-control mr-sm-3" id="fltConsola">
+									<option value="null">Ninguna</option>
+									<option value="Xbox">Xbox One</option>
+									<option value="PS4">Play Station 4</option>
+									<option value="Switch">Nintendo Switch</option>
+							</select>
+							<label class="text-white mr-sm-2">Stock:</label>
+							<select class="flt form-control" id="fltDisponible">
+								<option value="null">Ninguno</option>
+								<option value="true">Disponible</option>
+								<option value="false">No disponible</option>
+							</select>
+						</div>
+						<div id = "divDer" class="form-group col-md-4" style="padding-right: 0px;padding-left: 30px;">
+							<div class="form-check form-check-inline">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="chk custom-control-input" id="chkConsola" checked>
+									<label class="custom-control-label text-white" for="chkConsola">Consola</label>
+								</div>
+							</div>
+							<div class="form-check form-check-inline">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="chk custom-control-input" id="chkCompania" checked>
+									<label class="custom-control-label text-white" for="chkCompania">Compañía</label>
+								</div>
+							</div>
+							<div class="form-check form-check-inline">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="chk custom-control-input" id="chkPrecio" checked>
+									<label class="custom-control-label text-white" for="chkPrecio">Precio</label>
+								</div>
+							</div>
+							<div class="form-check form-check-inline">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="chk custom-control-input" id="chkDisponible" checked>
+									<label class="custom-control-label text-white" for="chkDisponible">Stock</label>
+								</div>
+							</div>
+						</div>
+					</form>
+				<table class="table table-hover table-bordered table-striped table-dark tablaVideoJuegos">
+					<thead id = "headTabla">
+					</thead>
+					<tbody id = "bodyTabla">
+					</tbody>
+				</table>
+			</div>
+			<div class="modal" id="modalCompra">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Carrito <i class="fa fa-shopping-cart"></i></h4>
+							<button type="button" class="close" data-dismiss="modal">×</button>
+						</div>
+						<div class="modal-body">
+							<table class="table table-striped tablaCompras">
+								<thead id = "headTablaCompra">
+									<th>Juego</th>
+									<th>Precio</th>
+									<th>Cancelar</th>
+								</thead>
+								<tbody id = "bodyTablaCompra">
+								</tbody>
+							</table>
+							<hr width="75%" />
+							<strong class="mr-sm-5" style="font-size: 20px">Total</strong>
+							<strong id="total" class="ml-sm-5" style="font-size: 20px; text-align:center;">$0</strong>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar <i class="fa fa-close" style="color:black;"></i></button>
+							<button type="button" class="btn btn-success float-right" onclick="alert('Fin demo');">Proceder al pago <i class="fa fa-credit-card" style="color: black"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

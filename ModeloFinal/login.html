@@ -1,0 +1,42 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Iniciar Sesión - BoostGame</title>
+        <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/iconshockluminasupermario/MAC/png/256/mario.png">
+        <link rel="stylesheet" href="ext/css/bootstrap.min.css">
+        <script src="ext/js/jquery-3.3.1.min.js"></script>
+        <script src="ext/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/styleLogin.css">
+        <script src="js/Genericos.js"></script>
+        <script src="js/Login.js"></script>
+    </head>
+    <body class="text-center" style="overflow-x: hidden">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <form class="form-signin mt-5">
+                        <img class="mb-3" src="https://cdn3.iconfinder.com/data/icons/iconshockluminasupermario/MAC/png/256/mario.png" alt="" width="142" height="142">
+                        <h1 class="h3 mb-3 font-weight-normal">¡Bienvenido!</h1>
+                        <input type="text" id="inputUser" class="form-control mb-2" placeholder="Usuario" onkeypress="Final.Genericos.EnterPress(event, Final.Login.IngresarDatos);">
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" onkeypress="Final.Genericos.EnterPress(event, Final.Login.IngresarDatos);">
+                        <div id="error" class="alert alert-danger" role="alert" style="display: none;">
+                            <strong>Error!</strong> Usuario o contraseña incorrectos, intente nuevamente.
+                        </div>
+                        <button id="btnIngresar" class="btn btn-lg btn-primary btn-block mt-5" type="button" onclick="Final.Login.IngresarDatos();">Ingresar</button>
+                        <p class="mt-5 mb-3 text-muted">© BoostGame - 2018</p>
+                    </form>
+                </div>
+                <div class="col-4">
+                    <div class="row justify-content-md-end divLoad" style="margin-top: 570px; display: none;">
+                        <h4 class="mt-5 mr-2">Cargando..</h4>
+                        <img class="loading mr-3 mt-2" id="spin" src="./img/mushroom.gif" alt="" width="65" height="65">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
